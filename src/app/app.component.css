@@ -1,0 +1,9 @@
+mat-sidenav{
+    width:250px;
+}
+.allwrapper{
+    height: 100%;
+}
+mat-sidenav-container{
+    min-height: calc(100vh - 55px);
+}

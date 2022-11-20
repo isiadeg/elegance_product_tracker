@@ -1,0 +1,18 @@
+<div class="tablecont">
+    <div class="tsize">
+    <table mat-table [dataSource]="pdata">
+    <ng-container *ngFor="let p of columnss" [matColumnDef]="p">
+        <th mat-header-cell *matHeaderCellDef> {{p}}</th>
+        <td mat-cell *matCellDef="let cc">{{cc[p]}}</td>
+
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnss">
+
+    </tr>
+    <tr mat-row *matRowDef="let ff; columns: columnss">
+
+    </tr>
+</table>
+</div>
+</div>

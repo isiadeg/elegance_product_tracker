@@ -1,0 +1,11 @@
+mat-form-field{
+    display: block;
+}
+
+.thirty{
+    width:30px; 
+    height: 30px;
+}
+mat-icon{
+   font-size: 40px;
+}

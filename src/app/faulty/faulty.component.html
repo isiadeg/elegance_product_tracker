@@ -1,0 +1,117 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Fault Form
+        </mat-card-title>
+        <mat-card-subtitle>
+            Fill for Products with Fault
+        </mat-card-subtitle>
+        <mat-icon
+        mat-card-avatar> create </mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="salesform" (ngSubmit)="save()">
+    
+        <mat-form-field>
+            <mat-label>
+                Date For Recording This Fault
+            </mat-label>
+            <input type="datetime-local"  
+            matInput formControlName="date" placeholder="date">
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>
+                Product Tag
+            </mat-label>
+            <input type="text"
+            matInput [matAutocomplete]="taga" 
+            formControlName="productTag">
+            <mat-autocomplete #taga="matAutocomplete">
+                <mat-option
+                *ngFor="let ptag of productTagObs | async" [value]="ptag">
+                    {{ptag}}
+                </mat-option>
+                <mat-option [value]="salesform.get('productTag')?.value"
+                *ngIf="(productTagObs | async).length == 0">
+                    {{'Use "'+salesform.get('productTag')?.value+'"'}}
+                </mat-option>
+    
+            </mat-autocomplete>
+        </mat-form-field>
+    
+        <!--<mat-form-field>
+            <mat-label>
+                Fault Level (Critical)
+            </mat-label>
+            <input type="text"
+            matInput placeholder="Buyer's Name"
+            formControlName="buyer"
+            >
+    
+        </mat-form-field>-->
+        <div class="mb3">
+            <label class="form-label" for="faultlevel">
+                Fault Level
+            </label>
+            <select #ff formControlName="faultLevel" id="faultlevel" class="form-select">
+                <option class="form-option" value="sellable"> Sellable  With Fault</option>
+                <option value="sellable when repaired">
+                    Sellable When Repaired
+                </option>
+                <option value="not sellable">
+                    Not Sellable
+                </option>
+            </select>
+        </div>
+        
+    
+        <div class="mt-3">
+            Fault Description
+        </div>
+        <div class="mb-3">
+            <ckeditor [editor]="Editor" (change)="onChange($event)"  (ready)="onReady($event)"></ckeditor>
+          </div>
+
+          <mat-form-field >
+            <mat-label>
+                With Engineer?
+            </mat-label>
+            <mat-select formControlName="withEngineer">
+                <mat-option value="Yes">
+                    Yes
+                </mat-option>
+                
+                <mat-option value="No">
+                    No
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          
+          <mat-form-field >
+            <mat-label>
+                Repaired?
+            </mat-label>
+            <mat-select formControlName="repaired">
+                <mat-option value="Yes">
+                    Yes
+                </mat-option>
+                
+                <mat-option value="No">
+                    No
+                </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+    </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button 
+        (click)="save()"> Save</button>
+    </mat-card-actions>
+    <mat-card-footer>
+    
+    </mat-card-footer>
+    </mat-card>
+    

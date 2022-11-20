@@ -1,0 +1,88 @@
+<mat-card class="position-relative">
+    <mat-card-header>
+        <mat-card-title>
+            Daily Count
+        </mat-card-title>
+        <mat-card-subtitle>
+            Count and fill products on the shelf
+            everyday
+        </mat-card-subtitle>
+        <mat-icon mat-card-avatar>
+            create
+        </mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="dailyform"
+        (ngSubmit)="false">
+        <div formArrayName="collections">
+            <div [formGroupName]="i" *ngFor="
+            let eachcoll of collectionsi.controls;
+            let i = index;
+            " class="position-relative d-flex 
+            align-items-center">
+            <div class="flex flex-column">            
+                    <mat-form-field appearance="fill" >
+                    <mat-label>
+                        Model
+                    </mat-label>
+                    <input type="text"
+                    matInput
+                    [matAutocomplete]="a"
+                    formControlName="model">
+                    <mat-autocomplete
+                    #a="matAutocomplete">
+                    <mat-option
+                    *ngFor="let val of tousearray | async "
+                    [value]="val">
+                    {{val}}
+                    </mat-option>
+                    <mat-option *ngIf="(tousearray | async).length === 0"
+                    [value]="collectionsi.controls[i].get('model')?.value">
+                        {{'Use "'+ collectionsi.controls[i].get('model')?.value +'"'}}
+                    </mat-option>
+                        
+                    </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>
+                        Number
+                    </mat-label>
+                    <input type="number"
+                    matInput formControlName="number">
+
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>
+                        Date
+                    </mat-label>
+                    <input type="datetime-local" matInput
+                    formControlName="date">
+                </mat-form-field>
+                
+            </div>
+
+                <mat-icon
+                class="ms-5 text-warning 
+                d-flex justify-content-center align-items-center thirty " (click)="removeFromCollection(i)">minimize </mat-icon>
+
+            </div>
+
+        </div>
+        <mat-icon 
+        (click)="addToCollection()"
+        class="position-absolute bottom-0 end-0 mb-5 me-3 ms-5 text-warning 
+        d-flex justify-content-center align-items-center thirty ">
+            add
+        </mat-icon>
+
+    </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button (click)="save()"
+        mat-raised-button>
+    Save</button>
+    </mat-card-actions>
+    <mat-card-footer>
+
+    </mat-card-footer>
+</mat-card>

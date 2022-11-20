@@ -1,0 +1,20 @@
+.card{
+   
+}
+.mat-toolbar{
+    
+    height:55px;
+}
+
+mat-form-field{
+    width: 100%;
+    background-color: white;
+}
+.addbutton{
+    z-index: 123456;
+}
+
+@media screen and (min-width: 1024px){
+   .card{ width:700px;
+}
+}

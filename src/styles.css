@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import url(../node_modules/bootstrap/dist/css/bootstrap.min.css);
+/*@import url(../node_modules/@fortawesome/fontawesome-free/css/all.css); */
+.mat-drawer-container{
+    background-color: transparent !important;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.ck-rounded-corners .ck.ck-editor__editable:not(.ck-editor__nested-editable), .ck.ck-editor__editable:not(.ck-editor__nested-editable).ck-rounded-corners{
+    border: 1px solid black;
+}

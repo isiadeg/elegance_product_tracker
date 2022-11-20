@@ -1,0 +1,42 @@
+<div class="flex justify-content-center align-items-center py-3
+d-flex" >
+    <button mat-stroked-button class="mx-5" (click)="updateOnline()">
+        Update Retrieved Info to Online 
+    </button>
+    <button
+    mat-button 
+    [matMenuTriggerFor]="datei"
+    matTooltip="Products are grouped according to the date in which they are brought in to the office ">
+        Choose A Date
+    </button>
+    <mat-menu #datei="matMenu">
+        
+       
+                <a mat-menu-item 
+                (click)="chosendate = eachdate"
+                *ngFor="let eachdate of dateArray " [routerLink]="['date', eachdate, 'summary']"> {{eachdate}} </a>
+            
+        
+    
+    </mat-menu>
+
+</div>
+<nav *ngIf="chosendate" mat-tab-nav-bar backgroundColor="accent" [tabPanel]="tabPanel">
+    <a mat-tab-link [routerLink]="['date', chosendate, 'summary' ]"
+       (click)="activeLink = 'summary'"
+       [active]="activeLink == 'summary'"> Summary </a>
+
+       <a mat-tab-link [routerLink]="['date', chosendate, 'product-status' ]"
+       (click)="activeLink = 'status'"
+       [active]="activeLink == 'status'"> Product Status </a>
+    
+       
+       <a mat-tab-link [routerLink]="['date', chosendate, 'product-features' ]"
+       (click)="activeLink = 'product-features'"
+       [active]="activeLink == 'product-features'"> Product Features </a>
+  </nav>
+  <mat-tab-nav-panel #tabPanel>
+<router-outlet>
+    
+</router-outlet>
+</mat-tab-nav-panel>

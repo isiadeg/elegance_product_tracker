@@ -1,0 +1,168 @@
+
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            Product Movement Form
+        </mat-card-title>
+        <mat-card-subtitle>
+            Enter product moving from the office and product returning back to the office
+        </mat-card-subtitle>
+        <mat-icon mat-card-avatar>create</mat-icon>
+    </mat-card-header>
+    <mat-card-content>
+        <form [formGroup]="pMovement"
+        (ngSubmit)="save()">
+
+        <mat-form-field appearance="fill">
+            <mat-label>
+                Movement Type
+            </mat-label>
+            <input type="text"
+            formControlName="movementType"
+            [matAutocomplete]="type"
+            matInput placeholder="movement type">
+            <mat-autocomplete
+            #type="matAutocomplete">
+            <mat-option
+            *ngFor="let eachtype of typeArrayObs | async"
+            [value]="eachtype">
+            {{eachtype}}
+
+
+            </mat-option>
+            <mat-option
+            [value]="pMovement.value.movementType" *ngIf="(typeArrayObs | async).length == 0">
+                {{'Use ' + pMovement.value.movementType}}
+            </mat-option>
+            </mat-autocomplete>
+            </mat-form-field>
+
+            
+            <mat-form-field>
+                <mat-label>
+                    Date of Occurence
+                </mat-label>
+                <input type="datetime-local" matInput placeholder="date"
+                formControlName="date" >
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>
+                    Product Tag
+                </mat-label>
+                <input type="text" matInput
+               placeholder="Product Tag" 
+               formControlName="productTag" [matAutocomplete]="prodtag">
+               <mat-autocomplete #prodtag="matAutocomplete">
+                <mat-option [value]="eachtag"
+                *ngFor="let eachtag of productTagArrayObs | async">
+                    {{eachtag}}
+                </mat-option>
+                <mat-option 
+                [value]="pMovement.value.productTag"
+                *ngIf="(productTagArrayObs | async).length == 0"
+                >
+                {{'Use '+pMovement.value.productTag}}
+                </mat-option>
+               </mat-autocomplete>
+
+            </mat-form-field>
+
+
+
+            <mat-form-field>
+                <mat-label>
+                    Product Type
+                </mat-label>
+                <input type="text" matInput
+               placeholder="Product Type" 
+               formControlName="productType" [matAutocomplete]="prodtype">
+               <mat-autocomplete #prodtype="matAutocomplete">
+                <mat-option [value]="eachPtype"
+                *ngFor="let eachPtype of productTypeObs | async">
+                    {{eachPtype}}
+                </mat-option>
+                <mat-option 
+                [value]="pMovement.value.productType"
+                *ngIf="(productTypeObs | async).length == 0"
+                >
+                {{'Use '+pMovement.value.productType}}
+                </mat-option>
+               </mat-autocomplete>
+
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>
+                    Person's Name
+                </mat-label>
+                <input type="text" matInput
+               placeholder="Person's Name" 
+               formControlName="personName" [matAutocomplete]="persName">
+               <mat-autocomplete #persName="matAutocomplete">
+                <mat-option [value]="eachperson"
+                *ngFor="let eachperson of personNameObs | async">
+                    {{eachperson}}
+                </mat-option>
+                <mat-option 
+                [value]="pMovement.value.personName"
+                *ngIf="(personNameObs | async).length == 0"
+                >
+                {{'Use '+pMovement.value.personName}}
+                </mat-option>
+               </mat-autocomplete>
+
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>
+                    Purpose
+                </mat-label>
+                <input type="text" matInput
+               placeholder="Purpose" 
+               formControlName="purpose" [matAutocomplete]="purp">
+               <mat-autocomplete #purp="matAutocomplete">
+                <mat-option [value]="eachpurp"
+                *ngFor="let eachpurp of purposeObs | async">
+                    {{eachpurp}}
+                </mat-option>
+                <mat-option 
+                [value]="pMovement.value.purpose"
+                *ngIf="(purposeObs | async).length == 0"
+                >
+                {{'Use '+pMovement.value.purpose}}
+                </mat-option>
+               </mat-autocomplete>
+               
+            </mat-form-field>
+            <p>
+                Extra Information
+            </p>
+            <div>
+                <ckeditor [editor]="Editor" (change)="onChange($event)"  (ready)="onReady($event)"></ckeditor>
+              </div>
+            
+              
+
+        </form>
+
+    </mat-card-content>
+    <mat-card-actions>
+        <button [ngClass]="{
+            'after': disablesave
+        }" mat-raised-button
+        color="accent" (click)="save();">
+                Save
+        </button>
+
+        <button [ngClass]="{
+            'after': disablesave
+        }" mat-raised-button
+        color="accent" (click)="sendOnline();">
+                Save Online
+        </button>
+    </mat-card-actions>
+    <mat-card-footer>
+
+    </mat-card-footer>
+</mat-card>

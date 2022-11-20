@@ -1,0 +1,15 @@
+.circle{
+    width: 30px; height: 30px; 
+    border-radius:  50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    color:white;
+}
+mat-expansion-panel{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

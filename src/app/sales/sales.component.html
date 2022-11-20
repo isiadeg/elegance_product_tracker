@@ -1,0 +1,80 @@
+<mat-card>
+<mat-card-header>
+    <mat-card-title>
+        Sales Form
+    </mat-card-title>
+    <mat-card-subtitle>
+        Fill for every Sales Made
+    </mat-card-subtitle>
+    <mat-icon
+    mat-card-avatar> create </mat-icon>
+</mat-card-header>
+<mat-card-content>
+    <form [formGroup]="salesform" (ngSubmit)="save()">
+
+    <mat-form-field>
+        <mat-label>
+            Date Sold
+        </mat-label>
+        <input type="datetime-local"  
+        matInput formControlName="date" placeholder="date">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>
+            Product Tag
+        </mat-label>
+        <input type="text"
+        matInput [matAutocomplete]="taga" 
+        formControlName="productTag">
+        <mat-autocomplete #taga="matAutocomplete">
+            <mat-option
+            *ngFor="let ptag of productTagObs | async" [value]="ptag">
+                {{ptag}}
+            </mat-option>
+            <mat-option [value]="salesform.get('productTag')?.value"
+            *ngIf="(productTagObs | async).length == 0">
+                {{'Use "'+salesform.get('productTag')?.value+'"'}}
+            </mat-option>
+
+        </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>
+            Buyer Name
+        </mat-label>
+        <input type="text"
+        matInput placeholder="Buyer's Name"
+        formControlName="buyer"
+        >
+
+    </mat-form-field>
+    
+    <mat-form-field>
+        <mat-label>
+            Location
+        </mat-label>
+        <input type="text"
+        matInput placeholder="Location"
+        formControlName="location"
+        >
+
+    </mat-form-field>
+    <div>
+        Extra Information
+    </div>
+    <div>
+        <ckeditor [editor]="Editor" (change)="onChange($event)"  (ready)="onReady($event)"></ckeditor>
+      </div>
+
+</form>
+</mat-card-content>
+<mat-card-actions>
+    <button mat-raised-button 
+    (click)="save()"> Save</button>
+</mat-card-actions>
+<mat-card-footer>
+
+</mat-card-footer>
+</mat-card>

@@ -1,0 +1,17 @@
+table{
+    width: max-content;
+}
+.tablecont{
+    width: 100%;
+    overflow-x: scroll;
+}
+.tsize{
+    min-width: 2000px;
+}
+.mat-header-cell, .mat-cell{
+padding-right: 40px;
+}
+.mat-header-cell{
+    font-weight: bold;
+    font-size: 1rem;
+}

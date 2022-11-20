@@ -1,0 +1,292 @@
+
+<div class="card m-auto mt-5">
+    <div class="card-header">
+        Enter Your Products 
+    </div>
+   
+<div class="card-body position-relative">
+<mat-expansion-panel class="btn btn-primary text-white addbutton rounded position-fixed p-0 bottom-0 end-0 me-5 mb-5" >
+   <mat-expansion-panel-header >
+    <mat-panel-title class="text-white">Add</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="btn btn-info addbutton rounded mb-3" (click)="addCollection()">
+        Add A Laptop
+    </div>
+       
+        <ng-template matExpansionPanelContent class="my-3">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Duplicate <br>
+                        <span class="text-sm">
+                           
+                        </span>
+
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                
+                <ng-template matExpansionPanelContent>
+                <div class=" mb-3">
+                    
+                    <div> Duplicate the last laptop you filled</div>
+                   <mat-form-field appearance="fill">
+                    <mat-label>
+                        Duplicate By
+                    </mat-label>
+                    <input matInput type="number"
+                    placeholder="Duplicate by" #duplicateby>
+                   </mat-form-field>
+
+               
+
+                    <a type="submit" value="Submit" mat-stroked-button
+                    (click)="duplicate()"> Duplicate</a>
+                  
+                </div>
+                
+            </ng-template>
+        
+            </mat-expansion-panel>
+          </ng-template>
+    
+
+</mat-expansion-panel>
+<form [formGroup]="laptopForm" (ngSubmit)="save();">
+<mat-accordion multi formArrayName="collection">
+
+
+    <mat-expansion-panel   [formGroupName]="a"
+    *ngFor="let each of collection.controls; let a = index;" >  
+      <mat-expansion-panel-header> 
+        <mat-panel-description>
+            Details for {{laptopForm.value.collection[a].tag?laptopForm.value.collection[a].tag:" Laptop "+ (a+1)}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+           
+                <div class="mb-3">
+                    <label for="date" class="form-label">
+                        Date Brought
+                    </label>
+                    <input type="date" class="form-control"
+                    formControlName="dateBrought" id="date">
+                </div>
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Tag</mat-label>
+                    <input type="text" placeholder="Tag" matInput formControlName="tag">
+                </mat-form-field>
+
+                
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Serial Number</mat-label>
+                    <input type="text"
+                     placeholder="Serial  Number" matInput
+                      formControlName="serialNumber">
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" >
+                    <mat-label>Brand</mat-label>
+
+                    <input type="text" 
+                    [matAutocomplete]="auto" placeholder="tags" matInput formControlName="brand">
+                    <mat-autocomplete #auto="matAutocomplete">
+                     <mat-option
+                        [value]="each"
+                        *ngFor="let each of trybs | async">{{each}}
+                    
+                     </mat-option>
+                     <mat-option *ngIf="trybsNormal?.length == 0"
+                     [value]="laptopForm.value.collection[a].brand">
+                        Use "{{laptopForm.value.collection[a].brand}}"
+                     </mat-option>
+                
+                    </mat-autocomplete>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="fill"
+               >
+                    <mat-label>Model</mat-label>
+                    <input type="text" 
+                    [matAutocomplete]="autob"
+                    placeholder="Model" matInput formControlName="model">
+                
+                <mat-autocomplete
+                #autob="matAutocomplete">
+                <mat-option [value]="eachmodel"
+                *ngFor="let eachmodel of models | async">
+                    {{eachmodel}}
+                </mat-option>
+                <mat-option [value]="laptopForm.value.collection[a].model" 
+                *ngIf="modelsNormal?.length == 0">
+                    Use "{{laptopForm.value.collection[a].model}}"
+                </mat-option>
+
+                </mat-autocomplete>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill"
+            >
+                 <mat-label>intel Core</mat-label>
+                 <input type="text" 
+                 [matAutocomplete]="autoc"
+                 placeholder="intel Core" matInput formControlName="intelCore">
+             
+             <mat-autocomplete
+             #autoc="matAutocomplete">
+             <mat-option [value]="eachcore"
+             *ngFor="let eachcore of intelCores | async">
+                 {{eachcore}}
+             </mat-option>
+             <mat-option [value]="laptopForm.value.collection[a].intelCore" 
+             *ngIf="intelCoresNormal?.length == 0">
+                 Use "{{laptopForm.value.collection[a].intelCore}}"
+             </mat-option>
+
+             </mat-autocomplete>
+         </mat-form-field>
+
+
+         <mat-form-field appearance="fill"
+         >
+              <mat-label>intel Generation</mat-label>
+              <input type="text" 
+              [matAutocomplete]="autod"
+              placeholder="intel Generation" matInput formControlName="intelGeneration">
+          
+          <mat-autocomplete
+          #autod="matAutocomplete">
+          <mat-option [value]="eachgen"
+          *ngFor="let eachgen of intelGenerations | async">
+              {{eachgen}}
+          </mat-option>
+          <mat-option [value]="laptopForm.value.collection[a].intelGeneration" 
+          *ngIf="intelGenerationsNormal?.length == 0">
+              Use "{{laptopForm.value.collection[a].intelGeneration}}"
+          </mat-option>
+
+          </mat-autocomplete>
+      </mat-form-field>
+
+
+
+        <div class="mb-3">
+            <label for="storagetype" class="form-label">
+             Storage Type
+            </label>
+            <select name="" id="storagetype" class="form-select"
+            formControlName="storageType">
+                <option value="HDD"> HDD</option>
+                <option value="SSD"> SSD</option>
+            </select>
+        </div>
+
+
+        <mat-form-field appearance="fill"
+        >
+             <mat-label>RAM CAPACITY</mat-label>
+             <input type="text" 
+             [matAutocomplete]="autoe"
+             placeholder="RAM CAPACITY" matInput formControlName="rAMProcessor">
+         
+         <mat-autocomplete
+         #autoe="matAutocomplete">
+         <mat-option [value]="eachram"
+         *ngFor="let eachram of rAMProcessors | async">
+             {{eachram}}
+         </mat-option>
+         <mat-option [value]="laptopForm.value.collection[a].rAMProcessor" 
+         *ngIf="ramNormal?.length == 0">
+             Use "{{laptopForm.value.collection[a].rAMProcessor}}"
+         </mat-option>
+
+         </mat-autocomplete>
+     </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label> Storage Capacity</mat-label>
+            <input type="text"
+            [matAutocomplete]="autof"
+            matInput formControlName="storageCapacity" placeholder="storage capacity">
+            <mat-autocomplete #autof="matAutocomplete"
+            >
+            <mat-option 
+            [value]="eachcapacity"
+            *ngFor="let eachcapacity of storageCapacities | async">
+                {{eachcapacity}}
+            </mat-option>
+            <mat-option 
+            *ngIf="storageCapacitiesNormal?.length == 0"
+            [value]="laptopForm.value.collection[a].storageCapacity">
+                Use "{{laptopForm.value.collection[a].storageCapacity}}"
+            </mat-option>
+
+            </mat-autocomplete>
+        </mat-form-field>
+
+        
+                <mat-form-field appearance="fill">
+                    <mat-label>Processor Speed</mat-label>
+                    <input type="text" placeholder="Processor Speed" matInput formControlName="speed">
+                </mat-form-field>
+
+
+                <div class="mb-3">
+                <div class="form-check form-switch">
+                <input type="checkbox" class="form-check-input "
+                formControlName="touchScreen" id="touchscreen" >
+                <label for="touchscreen" class="form-check-label"> Touch Screen?</label>
+            </div>
+        </div>
+
+
+                <div class="mb-3">
+              <mat-checkbox
+              labelPosition="after"
+              formControlName="keypadLight">
+                keypad Light?
+              </mat-checkbox>
+            </div>
+
+               <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input type="checkbox" name="" id="revolvable"
+                    class="form-check-input"
+                    formControlName="revolvable">
+                    <label for="revolvavle" class="form-check-label">
+                        Revolvable?
+                    </label>
+                </div>
+               </div>
+
+               <mat-form-field appearance="fill">
+                <mat-label>
+                    Average Battery Backup Duration
+                </mat-label>
+                <input type="text"
+                formControlName="averageBattery"
+                matInput placeholder="battery backup">
+
+               </mat-form-field>
+            
+                
+                  
+
+            
+        </mat-expansion-panel>
+
+
+    
+    </mat-accordion>
+
+
+    <button mat-stroked-button> Submit </button>
+</form>
+
+</div>
+</div>
